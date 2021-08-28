@@ -1,0 +1,28 @@
+header {
+    display: flex;
+    justify-content: space-around;   
+    align-items: center;
+    height: 10vh;
+    background-color: blue;
+    box-shadow: 0 0 15px black;
+}
+
+img{
+    margin-left: 10px;
+    height: 6vh;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+
+}
+
+nav a{
+    text-decoration: none;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    width: 10vh;
+    text-align: center;
+}
