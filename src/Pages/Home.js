@@ -4,29 +4,27 @@ import api from "../Services/api";
 import "./home.css";
 
 export default function Home() {
-  const [blog, setBlog] = useState([{}]);
-  
- 
- 
-  // const filterBlogs = (id) => {
-  //   const teste = blog
-  //   const blogId = teste.filter(b => b.id === id)
-  //   console.log(blogId)
-  // }
- 
-  useEffect(() => {
-    async function loadBlogs() {
-      const res = await api.get("/rn-api/?api=posts/")
-      setBlog(res.data)
-    }
-    loadBlogs()
-  }, [blog])
+  const [blog, setBlog] = useState(undefined);
 
+  async function loadBlogs() {
+    const res = await api.get();
+    const data = res.data;
+    setBlog(data);
+  }
+  useEffect(() => {
+    if (!blog) {
+      loadBlogs();
+    }
+  });
+
+  if (!blog) {
+    return <div>Carregando...</div>;
+  }
   return (
-    <div className="container">
-      {blog.map((b) => {
+    <div className="container" >
+      {blog.map((b, i) => {
         return (
-          <div className="listaBlogs"  key={b.id}>
+          <div className="listaBlogs" key={"BLOG_" + b.id}>
             <article>
               <strong>{b.titulo}</strong>
               <div>
@@ -34,8 +32,7 @@ export default function Home() {
               </div>
               <img src={b.capa} alt={b.titulo} />
               <span>{b.subtitulo}</span>
-              <Link to={`/blog/${b.id}`}>Teste</Link>
-              {/* <button onClick={() => filterBlogs(b.id)}>teste </button> */}
+              <Link to={`/blog/${b.id}`}>Ver Blog</Link>
             </article>
           </div>
         );
