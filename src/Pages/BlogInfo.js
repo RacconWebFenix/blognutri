@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "./blogInfo.css";
 import api from "../Services/api";
 import { toast } from "react-toastify";
