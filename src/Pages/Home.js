@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../Services/api";
-import "./home.css";
 
 export default function Home() {
   const [blog, setBlog] = useState(undefined);
@@ -18,22 +17,43 @@ export default function Home() {
   });
 
   if (!blog) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="progress">
+        <div className="indeterminate"></div>
+      </div>
+    );
   }
   return (
-    <div className="container" >
+    <div className="container">
       {blog.map((b, i) => {
         return (
-          <div className="listaBlogs" key={"BLOG_" + b.id}>
-            <article>
-              <strong>{b.titulo}</strong>
-              <div>
-                <h4>Categoria: {b.categoria}</h4>
-              </div>
-              <img src={b.capa} alt={b.titulo} />
-              <span>{b.subtitulo}</span>
-              <Link to={`/blog/${b.id}`}>Ver Blog</Link>
-            </article>
+          <div className="card" key={"BLOG_" + b.id}>
+            <div className="card-image waves-effect waves-block waves-light">
+              <img className="activator" src={b.capa} alt={b.titulo} />
+            </div>
+            <div className="card-content">
+              <span className="card-title activator grey-text text-darken-4">
+                {b.titulo}
+                <i className="material-icons right">more_vert</i>
+              </span>
+              <p>
+                <Link
+                  to={`/blog/${b.id}`}
+                  className="waves-effect waves-light blue accent-3 btn"
+                >
+                  Ver Blog
+                </Link>
+              </p>
+            </div>
+            <div className="card-reveal">
+              <span className="card-title grey-text text-darken-4">
+                {b.categoria}
+                <i class="material-icons right">close</i>
+              </span>
+              <p>
+                <span>{b.subtitulo}</span>
+              </p>
+            </div>
           </div>
         );
       })}

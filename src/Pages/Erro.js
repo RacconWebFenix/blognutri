@@ -5,11 +5,9 @@ import erroImg from "../img/erro404.jpg"
 
 export default function index() {
   return (
-    <div className="not-found">
-      <h1>404</h1>
-      <h2>Página não encontrada.</h2>
+    <div className="container">
       <img src={erroImg} alt="Erro Página não encontrada"></img>   
-      <Link to={"/"}>Voltar</Link>
+      <Link to={"/"} className="waves-effect purple darken-4 btn">Voltar</Link>
     </div>
   );
 }

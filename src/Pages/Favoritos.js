@@ -11,7 +11,11 @@ export default function Favoritos() {
   }, []);
 
   if (!blogF) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="progress">
+        <div className="indeterminate"></div>
+      </div>
+    );
   }
 
   function handleDelete(id) {
@@ -23,23 +27,40 @@ export default function Favoritos() {
 
   console.log(blogF);
   return (
-    <div>
-      <h1>Favoritos</h1>
-      {blogF.map((b) => {
-        return (
-          <div key={b.id}>
-            <ul>
-              <li>{b.titulo}</li>
-              <div>
-                <button>
-                  <Link to={`/blog/${b.id}`}>Ver Blog</Link>
-                </button>
-                <button onClick={() => handleDelete(b.id)}>Excluir Blog</button>
-              </div>
-            </ul>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <table className=" centered">
+        <thead>
+          <tr>
+            <th colSpan="3">Blogs Favoritos</th>
+          </tr>
+        </thead>
+        {blogF.map((b) => {
+          return (
+            <tbody>
+              <tr key={b.id}>
+                <td>{b.titulo}</td>
+                <td>
+                  <Link
+                    to={`/blog/${b.id}`}
+                    className="waves-effect waves-light btn"
+                  >
+                    Ver Blog
+                  </Link>
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleDelete(b.id)}
+                    className="waves-effect red darken-2
+ btn"
+                  >
+                    Excluir Blog
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          );
+        })}
+      </table>
+    </>
   );
 }
